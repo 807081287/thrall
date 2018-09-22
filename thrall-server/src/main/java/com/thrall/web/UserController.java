@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Author: huyd
  * Date: 2018/9/17 20:56
- * Description:
+ * Description:用户管理
  */
 @Api(value = "UserController", description = "用户相关api")
 @RestController
