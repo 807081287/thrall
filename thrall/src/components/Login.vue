@@ -5,13 +5,14 @@
     <Modal class="login-modal" v-model="loginModal" width="360" :closable="false" :mask-closable="false">
       <div>
         <h2 style="margin:10px;color:#abcdef;text-align:center">
-          <img :src="require('@/assets/img/logo.png')" alt="" height="50"></h2>
+          后台管理系统</h2>
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
           <Form-item prop="name">
             <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
           </Form-item>
           <Form-item prop="password">
-            <Input v-model="formValidate.password" @keyup.native.enter="handleSubmit('formValidate')" type="password" placeholder="请输入密码"></Input>
+            <Input v-model="formValidate.password" @keyup.native.enter="handleSubmit('formValidate')" type="password"
+                   placeholder="请输入密码"></Input>
           </Form-item>
 
           <Row>
@@ -30,16 +31,17 @@
       <div slot="footer">
         <Button type="primary" size="large" long :loading="modal_loading" @click="handleSubmit('formValidate')">登录
         </Button>
-        <small style="text-align: center;display:block" class="subText">©copyright by Artiely</small>
+        <small style="text-align: center;display:block" class="subText">©copyright by Huyida</small>
       </div>
     </Modal>
   </div>
 </template>
 <script>
   import Cookies from 'js-cookie'
+
   export default {
     name: 'login',
-    data () {
+    data() {
       return {
         loginModal: true,
         modal_loading: false,
@@ -58,7 +60,7 @@
       }
     },
     methods: {
-      handleSubmit (name) { // login
+      handleSubmit(name) { // login
         this.$refs[name].validate((valid) => {
           this.modal_loading = true
           setTimeout(() => {
@@ -77,7 +79,7 @@
           }, 2000)
         })
       },
-      toRegister () {
+      toRegister() {
         this.$router.push('/register')
       }
     }
@@ -86,16 +88,18 @@
 
 <style>
   .login {
-    height: 100%;
-    /*background-image: url('../../img/fullstack.jpg');*/
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    height: 150em;
+
+  }
 
   .bg {
     margin: 0 auto;
     height: 100%;
+    background-image: url('../assets/img/fullstack.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
-  }
+
 
 </style>
