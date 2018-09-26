@@ -89,7 +89,6 @@
 <style>
   .login {
     height: 150em;
-
   }
 
   .bg {
@@ -100,6 +99,5 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
-
 
 </style>
