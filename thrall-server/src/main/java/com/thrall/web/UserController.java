@@ -16,7 +16,9 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Author: huyd
@@ -24,7 +26,8 @@ import org.springframework.web.bind.annotation.*;
  * Description:用户管理
  */
 @Api(value = "UserController", description = "用户相关api")
-@RestController
+@Controller
+@RequestMapping("/")
 public class UserController {
     @Autowired
     UserService userService;
@@ -53,6 +56,7 @@ public class UserController {
     @ApiOperation(value = "添加用户", notes = "添加用户")
     @PostMapping("/addUser")
     public Result addUser(@RequestBody User user) {
+        User isUser = userService.getUser(user.getUsername());
         if (userService.getUser(user.getUsername()) != null) {
             return ResultGenerator.genFailResult("用户已存在");
         }
@@ -91,6 +95,21 @@ public class UserController {
     @RequiresPermissions(logical = Logical.AND, value = {"view", "edit"})
     public Result requirePermission() {
         return ResultGenerator.genSuccessResult("You are visiting permission require edit,view!");
+    }
+
+    @RequestMapping(value="/test", method=RequestMethod.GET)
+    public ModelAndView testPage() {
+        ModelAndView mv = new ModelAndView("index");
+        mv.addObject("hi","Hello World !");
+        return mv;
+    }
+
+    @GetMapping("/welcome")
+    ModelAndView welcome(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("welcome");
+        modelAndView.addObject("message","Welcome to Spring Boot & Thymeleaf");
+        return modelAndView;
     }
 
 }
