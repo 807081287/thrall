@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Api(value = "LoginController", description = "登陆模块")
+@Api(value = "LoginController", description = "登录模块")
 @Controller
 @RequestMapping("/")
 public class LoginController {
@@ -27,7 +27,7 @@ public class LoginController {
         return mv;
     }
 
-    @ApiOperation(value = "用户登陆", notes = "根据用户名和密码登陆")
+    @ApiOperation(value = "用户登录", notes = "根据用户名和密码登录")
     @PostMapping("loginValid")
     public ModelAndView login(@RequestParam String username, @RequestParam String password) {
         User user = new User();

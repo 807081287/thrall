@@ -12,7 +12,7 @@ import java.util.List;
 public interface LoginMapper {
 
     /**
-     * 登陆功能
+     * 登录功能
      *
      * @param user
      * @return
