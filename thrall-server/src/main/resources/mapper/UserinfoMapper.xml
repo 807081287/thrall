@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thrall.mapper.UserinfoMapper">
+
+    <resultMap id="userinfos" type="com.thrall.domain.Userinfo">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="realname" property="realname"/>
+        <result column="role" property="role"/>
+        <result column="permission" property="permission"/>
+        <result column="create_by" property="create_by"/>
+        <result column="create_date" property="create_date"/>
+        <result column="update_by" property="update_by"/>
+        <result column="update_date" property="update_date"/>
+        <result column="id" property="id"/>
+    </resultMap>
+
+
+    <select id="getByRealname" parameterType="java.lang.String" resultType="com.thrall.domain.Userinfo">
+        SELECT * FROM userinfo WHERE realname = #{realname}
+    </select>
+
+    <select id="getByUsername" parameterType="java.lang.String" resultType="com.thrall.domain.Userinfo">
+        SELECT * FROM userinfo WHERE username = #{username}
+    </select>
+
+    <select id="listAllUserinfo" resultMap="userinfos">
+        SELECT * FROM userinfo
+    </select>
+
+    <insert id="saveUserinfo" parameterType="com.thrall.domain.Userinfo">
+        INSERT INTO userinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            username,
+            <if test="realname != null and realname != ''">realname,</if>
+            password,role,permission,create_by,create_date,update_by,update_date
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{username},
+            <if test="realname != null and realname != ''">#{realname},</if>
+            #{password},#{role},#{permission},#{create_by},#{create_date},#{update_by},#{update_date}
+        </trim>
+    </insert>
+
+    <update id="updateUserinfo" parameterType="com.thrall.domain.Userinfo">
+        UPDATE userinfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username!=null">username=#{username},</if>
+            <if test="realname!=null">realname=#{realname},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="role!=null">role=#{role},</if>
+            <if test="permission!=null">permission=#{permission},</if>
+            <if test="create_by!=null">create_by=#{create_by},</if>
+            <if test="create_date!=null">create_date=#{create_date},</if>
+            <if test="update_by!=null">update_by=#{update_by},</if>
+            <if test="update_date!=null">update_date=#{update_date},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="removeUserinfo" parameterType="int">
+        DELETE FROM userinfo WHERE id = #{id}
+    </delete>
+</mapper>

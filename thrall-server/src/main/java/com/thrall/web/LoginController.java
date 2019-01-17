@@ -31,11 +31,12 @@ public class LoginController {
     @PostMapping("loginValid")
     public ModelAndView login(@RequestParam String username, @RequestParam String password) {
         User user = new User();
-        String encryptedPassword = SHA256Str.getSHA256StrJava(password);
+        String encryptedPassword = SHA256Str.getSHA256StrJava(password);//密码进行加密
         user.setUsername(username);
         user.setPassword(encryptedPassword);
         User u = loginService.login(user);
         ModelAndView mv = new ModelAndView();
+        //如果存在用户，说明登录成功，
         if (u != null) {
             User user1 = new User();
             user1.setUsername(username);

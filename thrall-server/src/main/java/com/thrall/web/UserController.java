@@ -47,9 +47,9 @@ public class UserController {
             user1.setPassword(password);
             user1.setRole(password);
             LoginInfo loginInfo = new LoginInfo(user1, JWTUtil.sign(username, encryptedPassword), "SUCCESS");
-            return ResultGenerator.genSuccessResult(loginInfo);
+            return ResultGenerator.getSuccessResult(loginInfo);
         } else {
-            return ResultGenerator.genFailResult("登录失败");
+            return ResultGenerator.getFailResult("登录失败");
         }
     }
 
@@ -58,11 +58,11 @@ public class UserController {
     public Result addUser(@RequestBody User user) {
         User isUser = userService.getUser(user.getUsername());
         if (userService.getUser(user.getUsername()) != null) {
-            return ResultGenerator.genFailResult("用户已存在");
+            return ResultGenerator.getFailResult("用户已存在");
         }
         user.setPassword(SHA256Str.getSHA256StrJava(user.getPassword()));
         int id = userService.saveUser(user);
-        return ResultGenerator.genSuccessResult(id);
+        return ResultGenerator.getSuccessResult(id);
     }
 
     @ApiOperation(value = "所有都可以访问")
@@ -70,9 +70,9 @@ public class UserController {
     public Result authAll() {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
-            return ResultGenerator.genSuccessResult("You are already logged in");
+            return ResultGenerator.getSuccessResult("You are already logged in");
         } else {
-            return ResultGenerator.genSuccessResult("You are guest");
+            return ResultGenerator.getSuccessResult("You are guest");
         }
     }
 
@@ -80,21 +80,21 @@ public class UserController {
     @GetMapping("/authed")
     @RequiresAuthentication
     public Result authed() {
-        return ResultGenerator.genSuccessResult("You are authenticated");
+        return ResultGenerator.getSuccessResult("You are authenticated");
     }
 
     @ApiOperation(value = "admin可以访问")
     @GetMapping("/authAdmin")
     @RequiresRoles("admin")
     public Result authAdmin() {
-        return ResultGenerator.genSuccessResult("You are admin!");
+        return ResultGenerator.getSuccessResult("You are admin!");
     }
 
     @ApiOperation(value = "requirePermission可以访问")
     @GetMapping("/requirePermission")
     @RequiresPermissions(logical = Logical.AND, value = {"view", "edit"})
     public Result requirePermission() {
-        return ResultGenerator.genSuccessResult("You are visiting permission require edit,view!");
+        return ResultGenerator.getSuccessResult("You are visiting permission require edit,view!");
     }
 
     @RequestMapping(value="/test", method=RequestMethod.GET)
