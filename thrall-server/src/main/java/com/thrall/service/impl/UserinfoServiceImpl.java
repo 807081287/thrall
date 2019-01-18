@@ -31,8 +31,8 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     @Override
-    public List<Userinfo> listAllUserinfo() {
-        return userinfoMapper.listAllUserinfo();
+    public List<Userinfo> getUserinfo(Userinfo userinfo) {
+        return userinfoMapper.getUserinfo(userinfo);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     @Override
-    public int updateUserinfo(int id) {
-        return userinfoMapper.updateUserinfo(id);
+    public int updateUserinfo(Userinfo userinfo) {
+        return userinfoMapper.updateUserinfo(userinfo);
     }
 
     @Override

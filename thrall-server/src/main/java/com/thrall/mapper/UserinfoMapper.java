@@ -34,13 +34,13 @@ public interface UserinfoMapper {
     Userinfo getByUsername(String username);
 
     /**
-     * @Description: 查询所有用户信息
-     * @Param: []
-     * @return: java.util.List<com.thrall.domain.Userinfo>
+     * @Description: 获取用户信息
+     * @Param: [userinfo]
+     * @return: com.thrall.domain.Userinfo
      * @Author: huyida
-     * @Date: 2019/01/17
+     * @Date: 2019/01/19
      */
-    List<Userinfo> listAllUserinfo();
+    List<Userinfo> getUserinfo(Userinfo userinfo);
 
     /**
      * @Description: 添加用户
@@ -53,12 +53,12 @@ public interface UserinfoMapper {
 
     /**
      * @Description: 更新用户信息
-     * @Param: [id]
+     * @Param: [userinfo]
      * @return: int
      * @Author: huyida
      * @Date: 2019/01/17
      */
-    int updateUserinfo(int id);
+    int updateUserinfo(Userinfo userinfo);
 
     /**
      * @Description: 根据用户名删除用户信息
