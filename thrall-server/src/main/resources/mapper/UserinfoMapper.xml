@@ -29,6 +29,7 @@
         <if test="id != null and id != ''">and id =#{id}</if>
         <if test="username != null and username != ''">and username LIKE CONCAT(CONCAT('%',#{username}),'%')</if>
         <if test="realname != null and realname != ''">and realname LIKE CONCAT(CONCAT('%',#{realname}),'%')</if>
+        <if test="role != null and role != ''">and role = #{role}</if>
     </select>
 
     <insert id="saveUserinfo" parameterType="com.thrall.domain.Userinfo">
@@ -63,5 +64,6 @@
 
     <delete id="removeUserinfo" parameterType="int">
         DELETE FROM userinfo WHERE id = #{id}
+        <if test="role != null and role != ''">and role = #{role}</if>
     </delete>
 </mapper>
