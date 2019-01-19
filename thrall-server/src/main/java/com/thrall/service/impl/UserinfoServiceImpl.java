@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @program: thrall-server
- * @description: 用户信息业务逻辑实现类
+ * @description: 用户信息业务逻辑接口类
  * @author: huyida
  * @create: 2019-01-17 23:01
  **/

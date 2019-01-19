@@ -12,7 +12,6 @@
         <result column="create_date" property="create_date"/>
         <result column="update_by" property="update_by"/>
         <result column="update_date" property="update_date"/>
-        <result column="id" property="id"/>
     </resultMap>
 
 

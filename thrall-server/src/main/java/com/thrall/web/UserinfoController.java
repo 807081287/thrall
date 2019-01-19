@@ -69,7 +69,7 @@ public class UserinfoController {
         }
         //删除用户
         int result = userinfoService.removeUserinfo(id);
-        return ResultGenerator.getSuccessResult("用户删除成功");
+        return ResultGenerator.getSuccessResult("删除成功");
     }
 
     @ApiOperation(value = "获取用户", notes = "根据查找的属性来获取用户")

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thrall.mapper.CollegeMapper">
+
+    <resultMap id="colleges" type="com.thrall.domain.College">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="create_by" property="create_by"/>
+        <result column="create_date" property="create_date"/>
+        <result column="update_by" property="update_by"/>
+        <result column="update_date" property="update_date"/>
+    </resultMap>
+
+    <select id="getByName" resultType="com.thrall.domain.College">
+        SELECT * FROM college WHERE name = #{name}
+    </select>
+
+    <select id="getById" resultType="com.thrall.domain.College">
+        SELECT * FROM college WHERE id = #{id}
+    </select>
+
+    <select id="getCollege" parameterType="com.thrall.domain.College" resultMap="colleges">
+        SELECT * FROM college WHERE 1=1
+        <if test="id != null and id != ''">and id =#{id}</if>
+        <if test="name != null and name != ''">and name LIKE CONCAT(CONCAT('%',#{name}),'%')</if>
+    </select>
+
+    <insert id="saveCollege" parameterType="com.thrall.domain.College">
+        INSERT INTO college (name,create_by,create_date,update_by,update_date)
+        VALUES (#{name},#{create_by},#{create_date},#{update_by},#{update_date})
+    </insert>
+
+    <delete id="removeCollege" parameterType="int">
+        DELETE FROM college WHERE id = #{id}
+    </delete>
+
+    <update id="updateCollege" parameterType="com.thrall.domain.College">
+        UPDATE college
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name!=null">name=#{name},</if>
+            <if test="create_by!=null">create_by=#{create_by},</if>
+            <if test="create_date!=null">create_date=#{create_date},</if>
+            <if test="update_by!=null">update_by=#{update_by},</if>
+            <if test="update_date!=null">update_date=#{update_date},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+</mapper>
