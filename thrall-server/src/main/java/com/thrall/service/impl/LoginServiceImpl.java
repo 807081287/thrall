@@ -1,6 +1,7 @@
 package com.thrall.service.impl;
 
 import com.thrall.domain.User;
+import com.thrall.domain.Userinfo;
 import com.thrall.mapper.LoginMapper;
 import com.thrall.mapper.UserMapper;
 import com.thrall.service.LoginService;
@@ -14,16 +15,25 @@ public class LoginServiceImpl implements LoginService {
     LoginMapper loginMapper;
 
     @Override
-    public User login(User user) {
-        User u = loginMapper.login(user);
-        if (u == null) {
-            return null;
-        }
-        return u;
+    public Userinfo login(Userinfo userinfo) {
+        return loginMapper.login(userinfo);
     }
 
     @Override
-    public int register(User user) {
-        return 0;
+    public int register(Userinfo userinfo) {
+        //对象判空处理
+        if ("".equals(userinfo.getUsername()) || "".equals(userinfo.getPassword())) {
+            return 0;
+        }
+        return loginMapper.register(userinfo);
+    }
+
+    @Override
+    public int resetPassword(Userinfo userinfo) {
+        //对象判空处理
+        if ("".equals(userinfo.getUsername()) || "".equals(userinfo.getRealname()) || "".equals(userinfo.getPassword())) {
+            return 0;
+        }
+        return loginMapper.resetPassword(userinfo);
     }
 }

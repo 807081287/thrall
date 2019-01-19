@@ -2,11 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.thrall.mapper.LoginMapper">
 
-    <select id="login" parameterType="com.thrall.domain.User" resultType="com.thrall.domain.User">
-        SELECT id,username,password,role,permission FROM user WHERE username = #{username} and password = #{password}
+    <select id="login" parameterType="com.thrall.domain.Userinfo" resultType="com.thrall.domain.Userinfo">
+        SELECT id,username,password,role,permission FROM userinfo WHERE username = #{username} and password = #{password}
     </select>
 
-    <insert id="register" parameterType="com.thrall.domain.User">
-        INSERT INTO user(username,password,role,permission) VALUES(#{username},#{password},#{role},#{permission})
+    <insert id="register" parameterType="com.thrall.domain.Userinfo">
+        INSERT INTO userinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            username,
+            <if test="realname != null and realname != ''">realname,</if>
+            password,role,permission,create_by,create_date,update_by,update_date
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{username},
+            <if test="realname != null and realname != ''">#{realname},</if>
+            #{password},#{role},#{permission},#{create_by},#{create_date},#{update_by},#{update_date}
+        </trim>
     </insert>
+
+    <update id="resetPassword" parameterType="com.thrall.domain.Userinfo">
+        UPDATE userinfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password!=null">password=#{password},</if>
+            <if test="update_by!=null">update_by=#{update_by},</if>
+            <if test="update_date!=null">update_date=#{update_date},</if>
+        </trim>
+        WHERE username=#{username} AND realname=#{realname}
+    </update>
+
 </mapper>

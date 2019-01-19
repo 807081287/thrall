@@ -27,8 +27,8 @@
     <select id="getUserinfo" parameterType="com.thrall.domain.Userinfo" resultMap="userinfos">
         SELECT * FROM userinfo WHERE 1=1
         <if test="id != null and id != ''">and id =#{id}</if>
-        <if test="username != null and username != ''">and username =#{username}</if>
-        <if test="realname != null and realname != ''">and realname =#{realname}</if>
+        <if test="username != null and username != ''">and username LIKE CONCAT(CONCAT('%',#{username}),'%')</if>
+        <if test="realname != null and realname != ''">and realname LIKE CONCAT(CONCAT('%',#{realname}),'%')</if>
     </select>
 
     <insert id="saveUserinfo" parameterType="com.thrall.domain.Userinfo">

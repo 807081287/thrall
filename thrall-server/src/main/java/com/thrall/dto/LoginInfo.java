@@ -1,6 +1,7 @@
 package com.thrall.dto;
 
 import com.thrall.domain.User;
+import com.thrall.domain.Userinfo;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,22 +11,22 @@ import com.thrall.domain.User;
  * Description:
  */
 public class LoginInfo {
-    User user;
+    Userinfo userinfo;
     String token;
     String message;
 
-    public LoginInfo(User user, String token, String message) {
-        this.user = user;
+    public LoginInfo(Userinfo userinfo, String token, String message) {
+        this.userinfo = userinfo;
         this.token = token;
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public Userinfo getUserinfo() {
+        return userinfo;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
     }
 
     public String getToken() {

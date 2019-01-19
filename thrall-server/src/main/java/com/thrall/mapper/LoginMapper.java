@@ -1,6 +1,7 @@
 package com.thrall.mapper;
 
 import com.thrall.domain.User;
+import com.thrall.domain.Userinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -12,19 +13,30 @@ import java.util.List;
 public interface LoginMapper {
 
     /**
-     * 登录功能
-     *
-     * @param user
-     * @return
+     * @Description: 用户登陆
+     * @Param: [userinfo]
+     * @return: com.thrall.domain.Userinfo
+     * @Author: huyida
+     * @Date: 2019/01/19
      */
-    User login(User user);
+    Userinfo login(Userinfo userinfo);
 
     /**
-     * 注册用户
-     *
-     * @param user
-     * @return
+     * @Description: 用户注册
+     * @Param: [userinfo]
+     * @return: int
+     * @Author: huyida
+     * @Date: 2019/01/19
      */
-    int register(User user);
+    int register(Userinfo userinfo);
+
+    /**
+     * @Description: 忘记密码
+     * @Param: [userinfo]
+     * @return: int
+     * @Author: huyida
+     * @Date: 2019/01/19
+     */
+    int resetPassword(Userinfo userinfo);
 
 }
