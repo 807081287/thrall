@@ -1,7 +1,9 @@
 package com.thrall.shiro;
 
 import com.thrall.domain.User;
+import com.thrall.domain.Userinfo;
 import com.thrall.service.UserService;
+import com.thrall.service.UserinfoService;
 import com.thrall.util.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -28,11 +30,11 @@ import java.util.Set;
 @Service
 public class MyRealm extends AuthorizingRealm {
 
-    private UserService userService;
+    private UserinfoService userinfoService;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserService(UserinfoService userinfoService) {
+        this.userinfoService = userinfoService;
     }
 
     /**
@@ -49,10 +51,10 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JWTUtil.getUsername(principals.toString());
-        User user = userService.getUser(username);
+        Userinfo userinfo = userinfoService.getByUsername(username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        simpleAuthorizationInfo.addRole(user.getRole());
-        Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
+        simpleAuthorizationInfo.addRole(userinfo.getRole());
+        Set<String> permission = new HashSet<>(Arrays.asList(userinfo.getPermission().split(",")));
         simpleAuthorizationInfo.addStringPermissions(permission);
         return simpleAuthorizationInfo;
     }
@@ -69,7 +71,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException("token invalid");
         }
 
-        User userBean = userService.getUser(username);
+        Userinfo userBean = userinfoService.getByUsername(username);
         if (userBean == null) {
             throw new AuthenticationException("User didn't existed!");
         }

@@ -1,34 +1,39 @@
 <style scoped>
-  .layout {
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-  }
+.layout {
+  border: 1px solid #d7dde4;
+  background: #f5f7f9;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
 
-  .layout-logo {
-    width: 100px;
-    height: 30px;
-    border-radius: 3px;
-    float: left;
-    position: relative;
-    font-size: large;
-    top: 5px;
-    left: 10px;
-  }
+.layout-logo {
+  width: 100px;
+  height: 30px;
+  border-radius: 3px;
+  float: left;
+  position: relative;
+  font-size: large;
+  top: 5px;
+  left: 10px;
+}
 
-  .layout-nav {
-    margin: 0 auto;
-    float: right;
-    position: relative;
-    top: 5px;
-    left: 10px;
-  }
+.layout-nav {
+  margin: 0 auto;
+  float: right;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
 
-  .layout-footer-center {
-    text-align: center;
-  }
+.layout-footer-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #969696;
+  text-align: center;
+}
 </style>
 <template>
   <div class="layout">
@@ -56,17 +61,21 @@
       <Layout :style="{padding: '0 0'}">
         <Content :style="{padding: '0 0', minHeight: '200px', background: '#fff'}">
           <Layout>
-            <Sider hide-trigger :style="{background: '#fff'}">
-              <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
+            <Sider hide-trigger :style="{background: '#fff',height:'100%'}">
+              <Menu
+                active-name="1-2"
+                theme="dark"
+                width="auto"
+                style="height:100%"
+                :open-names="['1']"
+              >
                 <MenuGroup title="菜单"></MenuGroup>
                 <MenuItem name="1">
-                  <Icon type="md-document"/>
-                  系统主页
+                  <Icon type="md-document"/>系统主页
                 </MenuItem>
                 <Submenu name="1">
                   <template slot="title">
-                    <Icon type="ios-navigate"></Icon>
-                    用户管理
+                    <Icon type="ios-navigate"></Icon>用户管理
                   </template>
                   <MenuItem name="1-1">超级管理员</MenuItem>
                   <MenuItem name="1-2">一般管理员</MenuItem>
@@ -74,41 +83,35 @@
                 </Submenu>
                 <Submenu name="2">
                   <template slot="title">
-                    <Icon type="ios-keypad"></Icon>
-                    信息管理
+                    <Icon type="ios-keypad"></Icon>信息管理
                   </template>
                   <MenuItem name="2-1">部门</MenuItem>
                   <MenuItem name="2-2">项目组</MenuItem>
                 </Submenu>
                 <Submenu name="3">
                   <template slot="title">
-                    <Icon type="ios-analytics"></Icon>
-                    数据分析
+                    <Icon type="ios-analytics"></Icon>数据分析
                   </template>
                   <MenuItem name="3-1">收支分析</MenuItem>
                   <MenuItem name="3-2">利润分析</MenuItem>
                 </Submenu>
                 <MenuItem name="2">
-                  <Icon type="md-chatbubbles"/>
-                  报表导出
+                  <Icon type="md-chatbubbles"/>报表导出
                 </MenuItem>
                 <MenuItem name="2">
-                  <Icon type="md-chatbubbles"/>
-                  系统设置
+                  <Icon type="md-chatbubbles"/>系统设置
                 </MenuItem>
               </Menu>
             </Sider>
-            <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-              Content
+            <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">Content
+              <Footer class="layout-footer-center">2018 &copy; Huyida</Footer>
             </Content>
           </Layout>
         </Content>
       </Layout>
-      <Footer class="layout-footer-center">2018 &copy; Huyida</Footer>
     </Layout>
-  </div>
   </div>
 </template>
 <script>
-  export default {}
+export default {};
 </script>

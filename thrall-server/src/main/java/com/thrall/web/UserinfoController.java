@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +76,7 @@ public class UserinfoController {
     @ApiOperation(value = "获取用户", notes = "根据查找的属性来获取用户")
     @PostMapping("/getUser")
     @RequiresRoles("admin")
+//    @RequiresAuthentication
     public Result getUser(@RequestBody Userinfo userinfo) {
         //根据对象中参数查询数据，如果对象为空，那么查询出所有用户
         List<Userinfo> u = userinfoService.getUserinfo(userinfo);

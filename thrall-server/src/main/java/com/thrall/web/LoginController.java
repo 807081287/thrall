@@ -36,8 +36,8 @@ public class LoginController {
             Userinfo user1 = new Userinfo();
             user1.setUsername(username);
             user1.setPassword(password);
-            user1.setRole(password);
-            LoginInfo loginInfo = new LoginInfo(user1, JWTUtil.sign(username, encryptedPassword), "SUCCESS");
+            user1.setRole(u.getRole());
+            LoginInfo loginInfo = new LoginInfo(user1, JWTUtil.sign(username, u.getPassword()), "SUCCESS");
             return ResultGenerator.getSuccessResult(loginInfo);
         } else {
             return ResultGenerator.getFailResult("登录失败");
